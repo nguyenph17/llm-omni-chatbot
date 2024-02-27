@@ -205,19 +205,16 @@ class Config(metaclass=SingletonMetaClass):
     def get(
         option: Optional[str] = None,
     ) -> Union["LocalConfig", "ProdConfig", "TestConfig"]:
+        _all_configs = {
+            "prod": ProdConfig,
+            "local": LocalConfig,
+            "test": TestConfig
+            }
         if option is not None:
-            return {
-                "prod": ProdConfig,
-                "local": LocalConfig,
-                "test": TestConfig,
-            }[option]()
+            _all_configs[option]()
         else:
             if API_ENV is not None:
-                return {
-                    "prod": ProdConfig,
-                    "local": LocalConfig,
-                    "test": TestConfig,
-                }[API_ENV.lower()]()
+                return _all_configs[API_ENV.lower()]()
             else:
                 return LocalConfig()
 
