@@ -1,3 +1,6 @@
+# The project is under development, you can check updates in branch dev
+
+
 # Omni-LLM-Chatbot
 
 Omni-LLM-Chatbot is a powerful AI chatbot designed to excel in conversational abilities, retrieving information from documents, and searching for and synthesizing answers from the internet. 
