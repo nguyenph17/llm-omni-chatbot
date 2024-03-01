@@ -1,0 +1,82 @@
+version: '3.9'
+
+volumes:
+  mysql:
+  redis:
+  qdrant:
+
+
+networks:
+  reverse-proxy-public:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.0.0/24 # subnet for traefik and other services
+
+services:
+  # No need to use traefik for local development
+
+  db:
+    image: mysql:latest
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+      TZ: "Asia/Seoul"
+    volumes:
+      - mysql:/var/lib/mysql
+    networks:
+      reverse-proxy-public:
+        ipv4_address: 172.16.0.11 # static IP
+
+  cache:
+    image: redis/redis-stack-server:latest
+    restart: always
+    environment:
+      - REDIS_ARGS=--requirepass ${REDIS_PASSWORD} --maxmemory 100mb --maxmemory-policy allkeys-lru --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis:/data
+    networks:
+      reverse-proxy-public:
+        ipv4_address: 172.16.0.12 # static IP
+
+  vectorstore:
+    image: qdrant/qdrant
+    restart: always
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant:/qdrant/storage
+    networks:
+      reverse-proxy-public:
+        ipv4_address: 172.16.0.13 # static IP
+
+  api:
+    image: cosogi/llmchat:230703
+    restart: always
+    env_file:
+      - .env
+    command:
+      - "--host"
+      - "0.0.0.0"
+      - "--port"
+      - "8000"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - cache
+    volumes:
+      - .:/app
+    networks:
+      reverse-proxy-public:
+        ipv4_address: 172.16.0.14 # static IP
