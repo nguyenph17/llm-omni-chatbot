@@ -1,0 +1,9 @@
+[36m[2024-02-28 20:04:25,912] ApiLogger:DEBUG - Testing logger: debug[0m
+[32m[2024-02-28 20:04:25,913] ApiLogger:INFO - Testing logger: info[0m
+[33m[2024-02-28 20:04:25,913] ApiLogger:WARNING - Testing logger: warning[0m
+[31m[2024-02-28 20:04:25,913] ApiLogger:ERROR - Testing logger: error
+Traceback (most recent call last):
+  File "/mnt/d/Projects/omni-chatbot/app/utils/logger.py", line 233, in <module>
+    raise Exception("Test exception")
+Exception: Test exception[0m
+[35m[1m[2024-02-28 20:04:25,916] ApiLogger:CRITICAL - Testing logger: critical[0m
