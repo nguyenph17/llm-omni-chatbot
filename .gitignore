@@ -1,0 +1,11 @@
+.env
+acme.json
+PRIVATE_*
+venv/
+.cache/
+*.pyc
+*.log
+llama_models/*
+!llama_models/ggml/llama_cpp_models_here.txt
+!llama_models/gptq/exllama_models_here.txt
+deprecated_*
