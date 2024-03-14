@@ -50,7 +50,13 @@ def set_priority(pid: Optional[int] = None, priority: str = "high"):
 
 
 def initialize_before_launch(install_packages: bool = False):
-    """Initialize the app"""
+    """
+    This function is called before the app is launched. 
+    It sets the priority of the process and installs the required packages.
+
+    Args:
+        install_packages (bool, optional): If you wanto install required packages in requirement file. Defaults to False.
+    """
     import platform
 
     if platform.system() == "Windows":

@@ -9,3 +9,5 @@ llama_models/*
 !llama_models/ggml/llama_cpp_models_here.txt
 !llama_models/gptq/exllama_models_here.txt
 deprecated_*
+*/__pycache__
+*.pytest_cache
