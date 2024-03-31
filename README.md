@@ -22,7 +22,7 @@ This is an example of how to list things you need to use the software and how to
 
 1. Clone the repo
    ```sh 
-   git clone https://github.com/your_username_/Omni-LLM-Chatbot.git
+   git clone git@github.com:nguyenph17/llm-omni-chatbot.git
 
 2. Install the necessary packages with the following command:
 
@@ -31,7 +31,5 @@ This is an example of how to list things you need to use the software and how to
 
 
 ## Usage
-Provide instructions on how to use your project.
+The project is under development. It will be released soon.
 
-## Contributing
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
