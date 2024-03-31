@@ -16,7 +16,6 @@ networks:
 
 services:
   # No need to use traefik for local development
-
   db:
     image: mysql:latest
     restart: always
